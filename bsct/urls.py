@@ -28,7 +28,9 @@ class URLGenerator( object ):
         """
         return url( 
             r'%s/create/?$' % self.bsct_view_prefix, 
-            bsct_views.CreateView.as_view( model = self.model, **kwargs ),
+            bsct_views.CreateView.as_view( model = self.model,
+            fields = self.model._meta.get_all_field_names(),
+            **kwargs ),
             name = '%s_create' % self.bsct_view_prefix,
         )
 
@@ -38,7 +40,9 @@ class URLGenerator( object ):
         """
         return url( 
             r'%s/update/(?P<pk>\d+)/?$' % self.bsct_view_prefix,
-            bsct_views.UpdateView.as_view( model = self.model, **kwargs ),
+            bsct_views.UpdateView.as_view( model = self.model,
+            fields = self.model._meta.get_all_field_names(),
+            **kwargs ),
             name = '%s_update' % self.bsct_view_prefix,
         )
 
